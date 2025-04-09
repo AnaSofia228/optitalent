@@ -1,6 +1,6 @@
 package com.example.optitalent.models;
 
-import jakart.persistence.*;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
