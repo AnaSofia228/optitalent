@@ -22,15 +22,6 @@ public class Payroll {
  private float amount;
  private String status;
 
- @Column(name = "id_bonuses_extra")
- private int idBonusesExtra;
-
- @Column(name = "id_hours_extra")
- private int idHoursExtra;
-
- @Column(name = "id_deductions")
- private int idDeductions;
-
  @ManyToOne
  @JoinColumn(name = "id_employee")
  private Employee employee;
