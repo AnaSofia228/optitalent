@@ -17,27 +17,27 @@ public class StatusController {
 
     @PostMapping
     public ResponseEntity<Status> create(@RequestBody Status status) {
-        return ResponseEntity.ok(statusService.create(status));
+        return ResponseEntity.ok(statusService.createStatus(status));
     }
 
     @GetMapping
     public ResponseEntity<List<Status>> getAll() {
-        return ResponseEntity.ok(statusService.getAll());
+        return ResponseEntity.ok(statusService.getAllStatuses());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Status> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(statusService.getById(id));
+        return ResponseEntity.ok(statusService.getStatusById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Status> update(@PathVariable Long id, @RequestBody Status statusDetails) {
-        return ResponseEntity.ok(statusService.update(id, statusDetails));
+        return ResponseEntity.ok(statusService.updateStatus(id, statusDetails));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        statusService.delete(id);
+        statusService.deleteStatus(id);
         return ResponseEntity.noContent().build();
     }
 }

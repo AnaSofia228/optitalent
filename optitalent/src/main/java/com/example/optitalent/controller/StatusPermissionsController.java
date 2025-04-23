@@ -10,34 +10,34 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/status-permissions")
-public class StatusPermissionController {
+public class StatusPermissionsController {
 
     @Autowired
     private StatusPermissionService statusPermissionService;
 
     @PostMapping
     public ResponseEntity<StatusPermission> create(@RequestBody StatusPermission statusPermission) {
-        return ResponseEntity.ok(statusPermissionService.create(statusPermission));
+        return ResponseEntity.ok(statusPermissionService.createStatusPermission(statusPermission));
     }
 
     @GetMapping
     public ResponseEntity<List<StatusPermission>> getAll() {
-        return ResponseEntity.ok(statusPermissionService.getAll());
+        return ResponseEntity.ok(statusPermissionService.getAllStatusPermissions());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<StatusPermission> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(statusPermissionService.getById(id));
+        return ResponseEntity.ok(statusPermissionService.getStatusPermissionById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<StatusPermission> update(@PathVariable Long id, @RequestBody StatusPermission details) {
-        return ResponseEntity.ok(statusPermissionService.update(id, details));
+        return ResponseEntity.ok(statusPermissionService.updateStatusPermission(id, details));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        statusPermissionService.delete(id);
+        statusPermissionService.deleteStatusPermission(id);
         return ResponseEntity.noContent().build();
     }
 }

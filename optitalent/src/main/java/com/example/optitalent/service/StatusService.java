@@ -20,7 +20,7 @@ public class StatusService {
 
     public List<Status> getAllStatuses() {
         return statusRepository.findAll();
-    }
+    } 
 
     public Status getStatusById(Long id) {
         Optional<Status> status = statusRepository.findById(id);

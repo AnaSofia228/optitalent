@@ -25,8 +25,8 @@ public class EmployeeController {
     // Obtener todos los empleados
     @GetMapping
     public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeService.getAllEmployee();
-        return ResponseEntity.ok(employee);
+        List<Employee> employees = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employees);
     }
 
     // Obtener un empleado por su ID
@@ -45,7 +45,7 @@ public class EmployeeController {
 
     // Eliminar un empleado
     @DeleteMapping("/{id}")
-    public ResponseEntity<void> deleteEmployee(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
         return ResponseEntity.noContent().build();
     }
