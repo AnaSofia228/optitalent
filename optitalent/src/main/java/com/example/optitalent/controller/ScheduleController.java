@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.optitalent.models.Schedule;
+import com.example.optitalent.dto.ScheduleDTO;
 import com.example.optitalent.service.ScheduleService;
 
 @RestController
@@ -15,26 +15,26 @@ public class ScheduleController {
 
     // Get all schedule
     @GetMapping
-    public List<Schedule> getAll() {
+    public List<ScheduleDTO> getAll() {
         return scheduleService.getAll();
     }
 
     // Get a schedule by ID
     @GetMapping("/{id}")
-    public Schedule getById(@PathVariable Long id) {
+    public ScheduleDTO getById(@PathVariable Long id) {
         return scheduleService.getById(id);
     }
 
     // Create new
     @PostMapping
-    public Schedule create(@RequestBody Schedule schedule) {
-        return scheduleService.create(schedule);
+    public ScheduleDTO create(@RequestBody ScheduleDTO dto) {
+        return scheduleService.create(dto);
     }
 
     // Update
     @PutMapping("/{id}")
-    public Schedule update(@PathVariable Long id, @RequestBody Schedule updated) {
-        return scheduleService.update(id, updated);
+    public ScheduleDTO update(@PathVariable Long id, @RequestBody ScheduleDTO dto) {
+        return scheduleService.update(id, dto);
     }
 
     // Delete

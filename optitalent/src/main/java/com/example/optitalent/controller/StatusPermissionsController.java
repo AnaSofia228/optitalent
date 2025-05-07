@@ -1,6 +1,6 @@
 package com.example.optitalent.controller;
 
-import com.example.optitalent.models.StatusPermission;
+import com.example.optitalent.dto.StatusPermissionDTO;
 import com.example.optitalent.service.StatusPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,28 +16,28 @@ public class StatusPermissionsController {
     private StatusPermissionService statusPermissionService;
 
     @PostMapping
-    public ResponseEntity<StatusPermission> create(@RequestBody StatusPermission statusPermission) {
-        return ResponseEntity.ok(statusPermissionService.createStatusPermission(statusPermission));
+    public ResponseEntity<StatusPermissionDTO> create(@RequestBody StatusPermissionDTO dto) {
+        return ResponseEntity.ok(statusPermissionService.create(dto));
     }
 
     @GetMapping
-    public ResponseEntity<List<StatusPermission>> getAll() {
-        return ResponseEntity.ok(statusPermissionService.getAllStatusPermissions());
+    public ResponseEntity<List<StatusPermissionDTO>> getAll() {
+        return ResponseEntity.ok(statusPermissionService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StatusPermission> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(statusPermissionService.getStatusPermissionById(id));
+    public ResponseEntity<StatusPermissionDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(statusPermissionService.getById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StatusPermission> update(@PathVariable Long id, @RequestBody StatusPermission details) {
-        return ResponseEntity.ok(statusPermissionService.updateStatusPermission(id, details));
+    public ResponseEntity<StatusPermissionDTO> update(@PathVariable Long id, @RequestBody StatusPermissionDTO dto) {
+        return ResponseEntity.ok(statusPermissionService.update(id, dto));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        statusPermissionService.deleteStatusPermission(id);
+        statusPermissionService.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

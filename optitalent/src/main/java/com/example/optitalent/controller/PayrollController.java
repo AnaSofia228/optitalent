@@ -1,6 +1,6 @@
 package com.example.optitalent.controller;
 
-import com.example.optitalent.models.Payroll;
+import com.example.optitalent.dto.PayrollDTO;
 import com.example.optitalent.service.PayrollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,30 +17,26 @@ public class PayrollController {
 
     // Create a new payroll
     @PostMapping
-    public ResponseEntity<Payroll> createPayroll(@RequestBody Payroll payroll) {
-        Payroll createdPayroll = payrollService.createPayroll(payroll);
-        return ResponseEntity.ok(createdPayroll);
+    public ResponseEntity<PayrollDTO> create(@RequestBody PayrollDTO dto) {
+        return ResponseEntity.ok(payrollService.createPayroll(dto));
     }
 
     // Get all payrolls
     @GetMapping
-    public ResponseEntity<List<Payroll>> getAllPayrolls() {
-        List<Payroll> payrolls = payrollService.getAllPayrolls();
-        return ResponseEntity.ok(payrolls);
+    public ResponseEntity<List<PayrollDTO>> getAll() {
+        return ResponseEntity.ok(payrollService.getAllPayrolls());
     }
 
     // Get a payroll by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Payroll> getPayrollById(@PathVariable Long id) {
-        Payroll payroll = payrollService.getPayrollById(id);
-        return ResponseEntity.ok(payroll);
+    public ResponseEntity<PayrollDTO> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(payrollService.getPayrollById(id));
     }
 
     // Update a payroll
     @PutMapping("/{id}")
-    public ResponseEntity<Payroll> updatePayroll(@PathVariable Long id, @RequestBody Payroll payrollDetails) {
-        Payroll updatedPayroll = payrollService.updatePayroll(id, payrollDetails);
-        return ResponseEntity.ok(updatedPayroll);
+    public ResponseEntity<PayrollDTO> update(@PathVariable Long id, @RequestBody PayrollDTO dto) {
+        return ResponseEntity.ok(payrollService.updatePayroll(id, dto));
     }
 
     // Delete a payroll

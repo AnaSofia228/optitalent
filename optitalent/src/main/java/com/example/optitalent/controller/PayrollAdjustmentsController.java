@@ -1,6 +1,6 @@
 package com.example.optitalent.controller;
 
-import com.example.optitalent.models.PayrollAdjustments;
+import com.example.optitalent.dto.PayrollAdjustmentDTO;
 import com.example.optitalent.service.PayrollAdjustmentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,30 +17,27 @@ public class PayrollAdjustmentsController {
 
     // Create a new payroll adjustment
     @PostMapping
-    public ResponseEntity<PayrollAdjustments> createPayrollAdjustment(@RequestBody PayrollAdjustments adjustment) {
-        PayrollAdjustments createdAdjustment = payrollAdjustmentsService.createPayrollAdjustment(adjustment);
-        return ResponseEntity.ok(createdAdjustment);
+    public ResponseEntity<PayrollAdjustmentDTO> createPayrollAdjustment(@RequestBody PayrollAdjustmentDTO dto) {
+        PayrollAdjustmentDTO created = payrollAdjustmentsService.createPayrollAdjustment(dto);
+        return ResponseEntity.ok(created);
     }
 
     // Get all payroll adjustments
     @GetMapping
-    public ResponseEntity<List<PayrollAdjustments>> getAllPayrollAdjustments() {
-        List<PayrollAdjustments> adjustments = payrollAdjustmentsService.getAllPayrollAdjustments();
-        return ResponseEntity.ok(adjustments);
+    public ResponseEntity<List<PayrollAdjustmentDTO>> getAllPayrollAdjustments() {
+        return ResponseEntity.ok(payrollAdjustmentsService.getAllPayrollAdjustments());
     }
 
     // Get a payroll adjustment by ID
     @GetMapping("/{id}")
-    public ResponseEntity<PayrollAdjustments> getPayrollAdjustmentById(@PathVariable Long id) {
-        PayrollAdjustments adjustment = payrollAdjustmentsService.getPayrollAdjustmentById(id);
-        return ResponseEntity.ok(adjustment);
+    public ResponseEntity<PayrollAdjustmentDTO> getPayrollAdjustmentById(@PathVariable Long id) {
+        return ResponseEntity.ok(payrollAdjustmentsService.getPayrollAdjustmentById(id));
     }
 
     // Update a payroll adjustment
     @PutMapping("/{id}")
-    public ResponseEntity<PayrollAdjustments> updatePayrollAdjustment(@PathVariable Long id, @RequestBody PayrollAdjustments adjustmentDetails) {
-        PayrollAdjustments updatedAdjustment = payrollAdjustmentsService.updatePayrollAdjustment(id, adjustmentDetails);
-        return ResponseEntity.ok(updatedAdjustment);
+    public ResponseEntity<PayrollAdjustmentDTO> updatePayrollAdjustment(@PathVariable Long id, @RequestBody PayrollAdjustmentDTO dto) {
+        return ResponseEntity.ok(payrollAdjustmentsService.updatePayrollAdjustment(id, dto));
     }
 
     // Delete a payroll adjustment

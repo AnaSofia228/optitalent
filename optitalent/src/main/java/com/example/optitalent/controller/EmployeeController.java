@@ -1,6 +1,6 @@
 package com.example.optitalent.controller;
 
-import com.example.optitalent.models.Employee;
+import com.example.optitalent.dto.EmployeeDTO;
 import com.example.optitalent.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,35 +15,31 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    //Crear un nuevo empleado
+    // Create new employee
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.createEmployee(employee);
-        return ResponseEntity.ok(createdEmployee);
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return ResponseEntity.ok(employeeService.createEmployee(employeeDTO));
     }
 
-    // Obtener todos los empleados
+    // Get all employees
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeService.getAllEmployees();
-        return ResponseEntity.ok(employees);
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+        return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
-    // Obtener un empleado por su ID
+    // Get employee by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-        Employee employee = employeeService.getEmployeeById(id);
-        return ResponseEntity.ok(employee);
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
-    // Actualizar un empleado
+    // Update employee
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails) {
-        Employee updatedEmployee = employeeService.updateEmployee(id, employeeDetails);
-        return ResponseEntity.ok(updatedEmployee);
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO dto) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, dto));
     }
 
-    // Eliminar un empleado
+    // Delete employee
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);

@@ -50,4 +50,7 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     private List<PerformanceEvaluation> evaluations;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private List<EmployeeSchedule> employeeSchedules;
 }

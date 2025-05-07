@@ -1,12 +1,13 @@
 package com.example.optitalent.service;
 
+import com.example.optitalent.dto.StatusPermissionDTO;
+import com.example.optitalent.mapper.StatusPermissionMapper;
 import com.example.optitalent.models.StatusPermission;
 import com.example.optitalent.repository.StatusPermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StatusPermissionService {
@@ -14,28 +15,37 @@ public class StatusPermissionService {
     @Autowired
     private StatusPermissionRepository statusPermissionRepository;
 
-    public StatusPermission createStatusPermission(StatusPermission statusPermission) {
-        return statusPermissionRepository.save(statusPermission);
+    @Autowired
+    private StatusPermissionMapper mapper;
+
+    public StatusPermissionDTO create(StatusPermissionDTO dto) {
+        StatusPermission entity = mapper.toEntity(dto);
+        return mapper.toDTO(statusPermissionRepository.save(entity));
     }
 
-    public List<StatusPermission> getAllStatusPermissions() {
-        return statusPermissionRepository.findAll();
+    public List<StatusPermissionDTO> getAll() {
+        return statusPermissionRepository.findAll().stream()
+                .map(mapper::toDTO)
+                .toList();
     }
 
-    public StatusPermission getStatusPermissionById(Long id) {
-        Optional<StatusPermission> sp = statusPermissionRepository.findById(id);
-        return sp.orElseThrow(() -> new RuntimeException("StatusPermission not found with id: " + id));
+    public StatusPermissionDTO getById(Long id) {
+        StatusPermission sp = statusPermissionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("StatusPermission not found with id: " + id));
+        return mapper.toDTO(sp);
     }
 
-    public StatusPermission updateStatusPermission(Long id, StatusPermission spDetails) {
-        StatusPermission sp = getStatusPermissionById(id);
-        sp.setName(spDetails.getName());
-        sp.setDescription(spDetails.getDescription());
-        return statusPermissionRepository.save(sp);
+    public StatusPermissionDTO update(Long id, StatusPermissionDTO dto) {
+        StatusPermission sp = statusPermissionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("StatusPermission not found with id: " + id));
+        sp.setName(dto.getName());
+        sp.setDescription(dto.getDescription());
+        return mapper.toDTO(statusPermissionRepository.save(sp));
     }
 
-    public void deleteStatusPermission(Long id) {
-        StatusPermission sp = getStatusPermissionById(id);
+    public void delete(Long id) {
+        StatusPermission sp = statusPermissionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("StatusPermission not found with id: " + id));
         statusPermissionRepository.delete(sp);
     }
 }

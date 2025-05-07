@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.optitalent.models.CountEmployeeSchedule;
-import com.example.optitalent.models.Employee;
+import com.example.optitalent.dto.CountEmployeeScheduleDTO;
+import com.example.optitalent.dto.EmployeeDTO;
 import com.example.optitalent.service.CountEmployeerScheduleService;
 import com.example.optitalent.service.EmployeeService;
 
@@ -19,41 +19,41 @@ public class CountEmployeerScheduleController {
     @Autowired
     private EmployeeService employeeService;
 
-    // Get all count employeer schedule
+    // Get all
     @GetMapping
-    public List<CountEmployeeSchedule> getAll() {
+    public List<CountEmployeeScheduleDTO> getAll() {
         return countEmployeerScheduleService.getAll();
-    }
+    } 
 
     // Get by Id
     @GetMapping("/{id}")
-    public CountEmployeeSchedule getById(@PathVariable Long id) {
+    public CountEmployeeScheduleDTO getById(@PathVariable Long id) {
         return countEmployeerScheduleService.getById(id);
     }
 
     // Get by employee ID
     @GetMapping("/by-employee-id/{employeeId}")
-    public List<CountEmployeeSchedule> getByEmployeeId(@PathVariable Long employeeId) {
+    public List<CountEmployeeScheduleDTO> getByEmployeeId(@PathVariable Long employeeId) {
         return countEmployeerScheduleService.getByEmployeeId(employeeId);
     }
 
     // Get by employee name
     @GetMapping("/by-employee-name/{name}")
-    public List<CountEmployeeSchedule> getByEmployeeName(@PathVariable String name) {
-        List<Employee> allEmployees = employeeService.getAllEmployees();
+    public List<CountEmployeeScheduleDTO> getByEmployeeName(@PathVariable String name) {
+        List<EmployeeDTO> allEmployees = employeeService.getAllEmployees();
         return countEmployeerScheduleService.getByEmployeeName(name, allEmployees);
     }
 
     // Create new
     @PostMapping
-    public CountEmployeeSchedule create(@RequestBody CountEmployeeSchedule schedule) {
-        return countEmployeerScheduleService.create(schedule);
+    public CountEmployeeScheduleDTO create(@RequestBody CountEmployeeScheduleDTO dto) {
+        return countEmployeerScheduleService.create(dto);
     }
 
     // Update
     @PutMapping("/{id}")
-    public CountEmployeeSchedule update(@PathVariable Long id, @RequestBody CountEmployeeSchedule updated) {
-        return countEmployeerScheduleService.update(id, updated);
+    public CountEmployeeScheduleDTO update(@PathVariable Long id, @RequestBody CountEmployeeScheduleDTO dto) {
+        return countEmployeerScheduleService.update(id, dto);
     }
 
     // Delete

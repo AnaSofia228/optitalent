@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.optitalent.models.EmployeeSchedule;
+import com.example.optitalent.dto.EmployeeScheduleDTO;
 import com.example.optitalent.service.EmployeeScheduleService;
 
 @RestController
@@ -16,25 +16,25 @@ public class EmployeeScheduleController {
 
     // Get all employee schedule
     @GetMapping
-    public List<EmployeeSchedule> getAll() {
+    public List<EmployeeScheduleDTO> getAll() {
         return employeeScheduleService.getAll();
     }
 
     // Get a employee schedule by ID
     @GetMapping("/{id}")
-    public EmployeeSchedule getById(@PathVariable Long id) {
+    public EmployeeScheduleDTO getById(@PathVariable Long id) {
         return employeeScheduleService.getById(id);
     }
 
     // Create new
     @PostMapping
-    public EmployeeSchedule create(@RequestBody EmployeeSchedule schedule) {
+    public EmployeeScheduleDTO create(@RequestBody EmployeeScheduleDTO schedule) {
         return employeeScheduleService.create(schedule);
     }
 
     // Update
     @PutMapping("/{id}")
-    public EmployeeSchedule update(@PathVariable Long id, @RequestBody EmployeeSchedule updated) {
+    public EmployeeScheduleDTO update(@PathVariable Long id, @RequestBody EmployeeScheduleDTO updated) {
         return employeeScheduleService.update(id, updated);
     }
 
